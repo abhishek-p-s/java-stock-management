@@ -1,8 +1,15 @@
 
 package javaapplication3;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class stock extends javax.swing.JFrame {
 double [] product=new double[10];
@@ -12,6 +19,9 @@ double [] product=new double[10];
     }
 
     @SuppressWarnings("unchecked")
+    
+   Connection con1;
+    PreparedStatement insert;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -82,6 +92,7 @@ double [] product=new double[10];
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -531,7 +542,7 @@ double [] product=new double[10];
 
         jMenu1.setText("File");
 
-        jMenuItem1.setText("logout");
+        jMenuItem1.setText("custumer details");
         jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenuItem1MouseClicked(evt);
@@ -543,6 +554,9 @@ double [] product=new double[10];
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem3.setText("logout");
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -693,7 +707,11 @@ System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+   
+        
+        
+        
+        
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -752,6 +770,53 @@ Calendar timer = Calendar.getInstance();
    dateexpires.setText("item valied");
    reorderdate.setText(Tdate.format(timer.getTime()));  
 }
+
+
+
+
+
+
+         String name=firstname.getText();
+         String product_name=prodectname.getText();
+         String Nooforder=nooforder.getText();
+         String orderDate=dateorder.getText();
+         String Total=total.getText();
+         
+        
+        
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con1=DriverManager.getConnection("jdbc:mysql://localhost/stock","root","");
+            insert=con1.prepareStatement("insert into record(name,product_name,No_of_order,date_order,Total_rupee)values(?,?,?,?,?)");
+            insert.setString(1, name);
+            insert.setString(2, product_name);
+            insert.setString(3, Nooforder);
+            insert.setString(4, orderDate);
+            insert.setString(5, Total);
+            insert.executeUpdate();
+            
+           
+          
+            
+            
+          
+            
+            
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(stock.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        catch (SQLException ex) {
+            Logger.getLogger(stock.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+
+
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jComboBox4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox4MouseClicked
@@ -769,9 +834,9 @@ Calendar timer = Calendar.getInstance();
     }//GEN-LAST:event_firstnameKeyPressed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-   loginpage obj=new loginpage();
-obj.setVisible(true);
-dispose();     // TODO add your handling code here:
+ custumer obj=new custumer();
+  obj.setVisible(true);
+  dispose();     
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
@@ -888,6 +953,7 @@ dispose();// TODO add your handling code here:
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
