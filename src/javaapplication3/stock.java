@@ -1,5 +1,7 @@
 
 package javaapplication3;
+import StockDetails;
+import StockDetails;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -92,6 +94,7 @@ double [] product=new double[10];
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -159,7 +162,7 @@ double [] product=new double[10];
         jLabel21.setText("pay method");
 
         jComboBox4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cash on delivery", "master card", "visa card", "credit card" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cash on delivery", "mastercard", "visa card", "credit card", "due" }));
         jComboBox4.setToolTipText("");
         jComboBox4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -555,6 +558,14 @@ double [] product=new double[10];
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem4.setText("stock details");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
         jMenuItem3.setText("logout");
         jMenu1.add(jMenuItem3);
 
@@ -575,6 +586,7 @@ double [] product=new double[10];
         setJMenuBar(jMenuBar1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -769,6 +781,7 @@ Calendar timer = Calendar.getInstance();
     valiedfrom.setText(Tdate.format(timer.getTime()));
    dateexpires.setText("item valied");
    reorderdate.setText(Tdate.format(timer.getTime()));  
+   
 }
 
 
@@ -795,16 +808,7 @@ Calendar timer = Calendar.getInstance();
             insert.setString(4, orderDate);
             insert.setString(5, Total);
             insert.executeUpdate();
-            
-           
-          
-            
-            
-          
-            
-            
-            
-            
+    
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(stock.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -857,7 +861,16 @@ if(jComboBox4.getSelectedItem().equals("credit card"))
     mastercard obj=new mastercard();
     obj.setVisible(true);
     dispose();
-}  // TODO add your handling code here:
+} 
+if(jComboBox4.getSelectedItem().equals("due")) 
+{
+    CustomerDue obj=new CustomerDue();
+    obj.setVisible(true);
+    dispose();
+    
+    
+}
+
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -865,6 +878,13 @@ editpage obj=new editpage();
 obj.setVisible(true);
 dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       StockDetails obj=new  StockDetails();
+       obj.setVisible(true);
+       dispose();
+       
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -954,6 +974,7 @@ dispose();// TODO add your handling code here:
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
